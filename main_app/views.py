@@ -11,8 +11,8 @@ def about(request):
 
 def creatures_index(request):
     creatures = Creature.objects.all()
-    return render(request, 'creatures/creatures_index.html', { 'creatures': creatures})
+    return render(request, 'creatures/creatures_index.html', { 'creatures': creatures })
 
-def creatures_details(request, creature_id):
+def creatures_detail(request, creature_id):
     creature = Creature.objects.get(id=creature_id)
-    return render(request, 'creatures/creatures_details.html', { 'creature': creature })
+    return render(request, 'creatures/creatures_detail.html', { 'creature': creature })
