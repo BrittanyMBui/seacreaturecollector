@@ -3,7 +3,7 @@ from django.http import HttpResponse
 import uuid
 import boto3
 from .models import Creature, Photo
-from .forms import FeedingForm
+from .forms import FeedingForm, CreatureForm
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'seacreaturecollector'
