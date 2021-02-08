@@ -16,8 +16,21 @@ def about(request):
     return render(request, 'about.html')
 
 def creatures_index(request):
+    if request.method == "POST":
+        creature_form = CreatureForm(request.POST)
+        if creature_form.is_valid():
+            new_creature = creature_form.save(commit=False)
+            new_creature.user = request.user
+            new_creature.save()
+            return redirect('creatures_index')
+
     creatures = Creature.objects.all()
-    return render(request, 'creatures/creatures_index.html', { 'creatures': creatures })
+    creature_form = CreatureForm()
+    context = {
+        'creatures': creatures,
+        'creature_form': creature_form
+    }
+    return render(request, 'creatures/creatures_index.html', context)
 
 def creatures_detail(request, creature_id):
     creature = Creature.objects.get(id=creature_id)
