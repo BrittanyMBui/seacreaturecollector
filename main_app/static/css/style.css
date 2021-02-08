@@ -1,0 +1,47 @@
+body {
+    background-image: url('https://videohive.img.customer.envatousercontent.com/files/237117245/Underwater_preview_01050.jpg?auto=compress%2Cformat&fit=crop&crop=top&max-h=8000&max-w=590&s=83a3261aae1c2358a7ee1ad165d41e75');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    color: white !important;
+}
+
+.card-title {
+    font-size: 30px !important;
+    font-weight: bold !important;
+    color: white !important;
+}
+
+img {
+    max-width: 500px;
+    max-height: 400px;
+}
+
+p {
+    color: white !important;
+    font-size: 24px !important;
+}
+
+.nav-wrapper {
+    background-color: darkblue !important;
+}
+
+.page-footer {
+    background-color: darkblue !important;
+}
+
+.card-content {
+    background-color: darkblue !important;
+}
+
+label {
+    font-size: 24px !important;
+    color: rgb(44, 44, 59) !important;
+}
+
+.btn {
+    background-color: darkblue !important;
+    display: inline-block !important;
+}

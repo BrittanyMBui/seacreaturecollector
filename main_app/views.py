@@ -4,6 +4,9 @@ import uuid
 import boto3
 from .models import Creature, Photo
 from .forms import FeedingForm, CreatureForm
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'seacreaturecollector'
@@ -15,6 +18,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def creatures_index(request):
     if request.method == "POST":
         creature_form = CreatureForm(request.POST)
@@ -24,7 +28,7 @@ def creatures_index(request):
             new_creature.save()
             return redirect('creatures_index')
 
-    creatures = Creature.objects.all()
+    creatures = Creature.objects.filter(user=request.user)
     creature_form = CreatureForm()
     context = {
         'creatures': creatures,
@@ -32,6 +36,7 @@ def creatures_index(request):
     }
     return render(request, 'creatures/creatures_index.html', context)
 
+@login_required
 def creatures_detail(request, creature_id):
     creature = Creature.objects.get(id=creature_id)
     feeding_form = FeedingForm()
@@ -41,6 +46,7 @@ def creatures_detail(request, creature_id):
     }
     return render(request, 'creatures/creatures_detail.html', context)
 
+@login_required
 def add_feeding(request, creature_id):
     form = FeedingForm(request.POST)
     if form.is_valid():
@@ -49,6 +55,7 @@ def add_feeding(request, creature_id):
         new_feeding.save()
     return redirect('detail', creature_id=creature_id)
 
+@login_required
 def add_photo(request, creature_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
@@ -62,3 +69,43 @@ def add_photo(request, creature_id):
         except:
             print('An error occured uploading file to S3')
         return redirect('detail', creature_id=creature_id)
+
+def signup(request):
+    error_message = ''
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('creatures_index')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {
+        'form': form, 'error_message': error_message
+    }
+    return render(request, 'registration/signup.html', context)
+
+@login_required
+def delete_creature(request, creature_id):
+    if request.method == "POST":
+        creature = Creature.objects.get(id=creature_id)
+        creature.delete()
+        return redirect('creatures_index')
+
+@login_required
+def edit_creature(request, creature_id):
+    creature = Creature.objects.get(id=creature_id)
+
+    if request.method == "GET":
+        creature_form = CreatureForm(instance=creature)
+        context = {
+            'form': creature_form
+        }
+        return render(request, 'creatures/creatures_edit.html', context)
+    
+    else:
+        creature_form = CreatureForm(request.POST, instance=creature)
+        if creature_form.is_valid():
+            creature_form.save()
+            return redirect('detail', creature_id=creature_id)

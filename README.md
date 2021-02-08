@@ -1,21 +1,7 @@
-# Finch Collector - Views and Templates
+The Sea Creature Collector -
 
-The lab for this lesson is repeating everything we just did, except you'll collect something else like Finches and call the project something like finchcollector, or whatever.
+App was built using HTML, CSS, Django, Materialize, PostgreSql
 
-- Fork and clone this repo
-- Pick a reource. (Dogs, Cards, Stamps, etc)
-- Initialize your project. (Do not forget your .env)
-- Create your db. 
-- Configure your application to connect to the db.
-(Dont forget to use startapp to get your application folder and include it in your settings.py)
-- Create a home route, about route, and index route. 
-- Create a template view that extends a base for all the routes. 
+This app is meant to be somewhat lighthearted as well as educational. A user can create an account and go in and upload photos and names/species/descriptions of sea creatures. A user can also add feedings for their sea creatures, including four different types of meals and a breakfast, lunch or dinner option. If the creature hasn't eaten in a while, a prompt will display that the creature needs to be fed. After all three meals are given for the day, the prompt returns to normal. User's can also edit or delete their sea creatures.
 
-
-Because your completed Finch Collector app will be fairly comprehensive and be a nice addition to your portfolio, you should **create it outside of the class repo** so that you can make it a repo in your personal GitHub account.
-
-## References
-
-[Django Template Docs](https://docs.djangoproject.com/en/3.0/ref/templates/builtins/)
-
-[Django Static Files](https://docs.djangoproject.com/en/3.0/howto/static-files/)
+I hope to add features such as a delete photo functionality, a 'clear all' function for the feeding logs, and polish up some styling.

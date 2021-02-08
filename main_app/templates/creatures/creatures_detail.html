@@ -9,7 +9,20 @@
                 <p>Species: {{ creature.species }}</p>
                 <p>Description: {{ creature.description }}</p>
             </div>
+
+            <div class="card-action">
+                <form action="{% url 'delete_creature' creature.id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn" type="submit" id="btn">Delete</button>
+                </form>
+                <form action="{% url 'edit_creature' creature.id %}">
+                    {% csrf_token %}
+                    <button class="btn" id="btn">Edit</button>
+                </form>
+            </div>
         </div>
+
+ 
 
         <div class="col s6">
             <form action="{% url 'add_feeding' creature.id %}" method="POST">
@@ -44,8 +57,12 @@
         </div>
     </div>
 </div>
+
 {% for photo in creature.photo_set.all %}
     <img class="responsive-img card-panel" src="{{ photo.url }}">
+    <form action="" method="POST">
+        <input type="submit" class="btn" value="Delete Photo">
+    </form>
 {% empty %}
     <div class="card-panel teal-text center-align">No Photos Uploaded</div>
 {% endfor %}
