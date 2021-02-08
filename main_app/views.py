@@ -70,6 +70,14 @@ def add_photo(request, creature_id):
             print('An error occured uploading file to S3')
         return redirect('detail', creature_id=creature_id)
 
+# def delete_photo(request, creature_id, photo_id):
+#     if request.method == "POST":
+
+#         try:
+#             s3 = boto3.client('s3')
+#             s3.delete_object(creature_id=creature_id, photo_id=photo_id)
+#             return redirect('creatures_detail')
+
 def signup(request):
     error_message = ''
     if request.method == "POST":

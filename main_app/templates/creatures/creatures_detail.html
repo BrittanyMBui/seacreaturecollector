@@ -32,7 +32,7 @@
             </form>
             <br>
             {% if creature.fed_for_today %}
-                <div class="card-panel teal-text center-align">{{ creature.name }} has been fed all meals for today.</div>
+                <div class="card-panel teal-text center-align">Thank you for feeding your {{ creature.name }}.</div>
             {% else %}
                 <div class="card panel red-text center-align">{{ creature.name }} is angry, starving, and about to die.</div>
             {% endif %}
@@ -61,6 +61,7 @@
 {% for photo in creature.photo_set.all %}
     <img class="responsive-img card-panel" src="{{ photo.url }}">
     <form action="" method="POST">
+        {% csrf_token %}
         <input type="submit" class="btn" value="Delete Photo">
     </form>
 {% empty %}

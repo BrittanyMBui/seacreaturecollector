@@ -2,6 +2,7 @@ body {
     background-image: url('https://videohive.img.customer.envatousercontent.com/files/237117245/Underwater_preview_01050.jpg?auto=compress%2Cformat&fit=crop&crop=top&max-h=8000&max-w=590&s=83a3261aae1c2358a7ee1ad165d41e75');
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed; 
 }
 
 h1 {
@@ -15,8 +16,8 @@ h1 {
 }
 
 img {
-    max-width: 500px;
-    max-height: 400px;
+    max-width: 700px;
+    max-height: 600px;
 }
 
 p {
@@ -38,10 +39,18 @@ p {
 
 label {
     font-size: 24px !important;
-    color: rgb(44, 44, 59) !important;
+    color: rgb(5, 22, 44) !important;
 }
 
 .btn {
     background-color: darkblue !important;
     display: inline-block !important;
+}
+
+textarea {
+    color: white !important;
+}
+
+.datepicker-day-button {
+    color: black !important;
 }
